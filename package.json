@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/majid-rafei/eClassBackEndNodeJs#readme",
   "dependencies": {
+    "@prisma/client": "^3.10.0",
     "cors": "^2.8.5",
     "debug": "^4.3.3",
     "express": "^4.17.3",

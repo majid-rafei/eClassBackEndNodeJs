@@ -145,5 +145,30 @@ This file is located inside prisma folder at the root directory of the project.
 Hence, we create a folder named *prisma* in the project and inside it create a file named `schema.prisma`.
 This file holds some database configurations and also models which are related to the database tables.
 If models are defined, then there is a migration command which is used to create or modify the tables.
+
+* `npx prisma migrate dev --name init`
+
 Also, there is a possibility to create models in prisma file using prepared tables.
 This is a two-way relation between model and table.
+
+To use Prisma as the client, the following command is executed:
+
+* `npm install @prisma/client`
+
+The best practice to connect to the database is to create a single instance of database connection
+so that no other parallel connection can make insertion or update over table rows.
+Therefore, the single-tone pattern is selected to develop the Prisma connection.
+We place this service into the services folder of the common module.
+
+In order to use this service in other files, it should be imported as the following:
+
+```ts
+import PrismaService from '/src/common/services/prisma.service';
+const prisma = PrismaService.getPrisma();
+```
+
+and then the following code to make a query:
+
+```ts
+prisma.TABLE_NAME.ACTION({...})
+```

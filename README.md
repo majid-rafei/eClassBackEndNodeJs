@@ -130,3 +130,20 @@ One of the common files is `common.routes.config.ts`, which is for configuring r
 ### Sub-task 2-2: Creating directories like interfaces, services, etc. to add common files created during project development
 
 Directories like interfaces and services are the most common ones shared between modules. 
+
+## Step 3: Initializing and preparing database connection
+In this section, **Prisma** package is introduced as the manager of the database connections.
+Then a service will be created to import CSV files into the database using Prisma models.
+
+### Sub-task 3-1: Initializing and preparing codes for database connection using Prisma package.
+**Prisma** is selected as the node package for manipulating database queries and models.
+Prisma is a new generation database connection handler with an emphasis on checking run-time data types.
+This feature of Prisma, distinguishes it from other database management packages.
+
+To use Prisma, a schema file should be defined.
+This file is located inside prisma folder at the root directory of the project.
+Hence, we create a folder named *prisma* in the project and inside it create a file named `schema.prisma`.
+This file holds some database configurations and also models which are related to the database tables.
+If models are defied, then there is a migration command which is used to create or modify the tables.
+Also, there is a possibility to create models in prisma file using prepared tables.
+This is a two-way relation between model and table.

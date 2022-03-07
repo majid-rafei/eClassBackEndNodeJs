@@ -155,6 +155,9 @@ To use Prisma as the client, the following command is executed:
 
 * `npm install @prisma/client`
 
+Prisma needs .env file in which database *dns* is stored.
+This file at located in the root of the project.
+
 The best practice to connect to the database is to create a single instance of database connection
 so that no other parallel connection can make insertion or update over table rows.
 Therefore, the single-tone pattern is selected to develop the Prisma connection.

@@ -70,3 +70,38 @@ We create the tsconfig.json file to configure typescript. The tsconfig.json file
     }
 }
 ```
+
+### Sub-task 1-2: Creating docker-compose.yml file to create a container for postgresql database
+
+Docker is used to create an isolated and virtual environment for the project. Docker needs a docker-compose.yml file for the services of the project.
+In this project we create a service which contains necessary environment for postgresql database.
+
+docker-compose.yml file contains the following codes:
+
+```yaml
+version: '3.3'
+services:
+    postgres:
+        image: postgres:13.5
+        restart: always
+        hostname: postgres
+        container_name: postgres
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres_123
+            POSTGRES_DB: dundts
+        volumes:
+            - postgres:/var/lib/postgresql/data
+        ports:
+            - '15432:5432'
+volumes:
+    postgres:
+```
+
+To create the docker container, the following command is executed:
+
+* `sudo docker-compose up -d`
+
+Docker needs root or sudo access to the working system.
+
+After this command, the postgresql database is initialized and ready to use at `localhost:15432`.

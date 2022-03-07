@@ -110,3 +110,11 @@ After this command, the postgresql database is initialized and ready to use at `
 
 A directory named `src` is created which is intended to maintain project files and source codes. 
 All modules are created in this folder.
+
+## Step 2: Initializing Common module: to store common codes
+
+The common module is the first and base module and shares codes with other modules to prevent rewriting common codes.
+
+### Sub-task 2-1: Creating common Route file to use with other modules
+
+One of the common files is `common.routes.config.ts`, which is for configuring routes of the application and other modules are inherited from it.

@@ -43,6 +43,8 @@ For this purpose, run the following command:
 
 This will create a *package.json* file, which is npm entry file for package management.
 
+#### Installing required packages
+
 Next, we will install npm packages that are needed for this project.
 Let's execute the following command:
 
@@ -51,6 +53,8 @@ Let's execute the following command:
 and then the following:
 
 `npm install --save-dev @types/cors @types/express @types/debug source-map-support eslint typescript prisma pm2`
+
+#### Creating tsconfig.json file
 
 We create the tsconfig.json file to configure typescript. The tsconfig.json file contains the following codes:
 

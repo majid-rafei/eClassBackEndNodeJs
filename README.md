@@ -9,7 +9,7 @@ This is the back-end project for E-class simple written by Node.js and Typescrip
 In order to run project, please follow these stepsL
 * Download this git repository
 * Run: `npm install`
-* 
+* Run: `sudo docker-compose up -d`
 
 ## Steps into the back-end project
 The implementation of the project is decided into the following sub-tasks:

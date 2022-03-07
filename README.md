@@ -19,7 +19,7 @@ The implementation of the project is decided into the following sub-tasks:
     * Sub-task 1-3: Creating src folder for storing the project modules
 * Step 2: Initializing Common module: to store common codes
     * Sub-task 2-1: Creating common Route file to use with other modules
-    * Sub-task 2-2: Creating directories like interfaces, services, etc. to add common files created during project development.
+    * Sub-task 2-2: Creating directories like interfaces, services, etc. to add common files created during project development
 * Step 3: Initializing and preparing database connection
     * Sub-task 3-1: Initializing and preparing codes for database connection using Prisma package.
     * Sub-task 3-2: Importing E-class csv files into database
@@ -118,3 +118,7 @@ The common module is the first and base module and shares codes with other modul
 ### Sub-task 2-1: Creating common Route file to use with other modules
 
 One of the common files is `common.routes.config.ts`, which is for configuring routes of the application and other modules are inherited from it.
+
+### Sub-task 2-2: Creating directories like interfaces, services, etc. to add common files created during project development
+
+Directories like interfaces and services are the most common ones shared between modules. 

@@ -105,3 +105,8 @@ To create the docker container, the following command is executed:
 Docker needs root or sudo access to the working system.
 
 After this command, the postgresql database is initialized and ready to use at `localhost:15432`.
+
+### Sub-task 1-3: Creating src folder for storing the project modules
+
+A directory named `src` is created which is intended to maintain project files and source codes. 
+All modules are created in this folder.

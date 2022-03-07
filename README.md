@@ -144,6 +144,6 @@ To use Prisma, a schema file should be defined.
 This file is located inside prisma folder at the root directory of the project.
 Hence, we create a folder named *prisma* in the project and inside it create a file named `schema.prisma`.
 This file holds some database configurations and also models which are related to the database tables.
-If models are defied, then there is a migration command which is used to create or modify the tables.
+If models are defined, then there is a migration command which is used to create or modify the tables.
 Also, there is a possibility to create models in prisma file using prepared tables.
 This is a two-way relation between model and table.

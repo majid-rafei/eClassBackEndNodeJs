@@ -74,6 +74,14 @@ We create the tsconfig.json file to configure typescript. The tsconfig.json file
 ### Sub-task 1-2: Creating docker-compose.yml file to create a container for postgresql database
 
 Docker is used to create an isolated and virtual environment for the project. Docker needs a docker-compose.yml file for the services of the project.
+
+Creating database and the connection to it are the first steps to go deep into the application.
+Decision on choosing the type of database (relational with schema or non-relational with no-schema) and the database are done based on the application.
+For applications with big and relational data, Postgresql database is offered, which is a relational database.
+In this project we use Postgresql because we have relational tables which are utilized for classifications
+and contain financial, units, and many other data types.
+
+To install and run a Postgresql database using Docker, the docker-compose.yml file is used.
 In this project we create a service which contains necessary environment for postgresql database.
 
 docker-compose.yml file contains the following codes:

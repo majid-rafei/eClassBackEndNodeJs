@@ -1,4 +1,4 @@
-~~# EClass Back-End with Node.js and TypeScript
+# EClass Back-End with Node.js and TypeScript
 
 This is the back-end project for E-class simple written by Node.js and Typescript.
 

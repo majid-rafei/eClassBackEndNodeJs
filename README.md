@@ -39,7 +39,7 @@ In this step, all initializations to have the base server using Node.js and type
 #### Initializing npm
 For this purpose, run the following command:
 
-`npm init`
+* `npm init`
 
 This will create a *package.json* file, which is npm entry file for package management.
 
@@ -48,11 +48,11 @@ This will create a *package.json* file, which is npm entry file for package mana
 Next, we will install npm packages that are needed for this project.
 Let's execute the following command:
 
-`npm install express debug winston express-winston cors express-validator`
+* `npm install express debug winston express-winston cors express-validator`
 
 and then the following:
 
-`npm install --save-dev @types/cors @types/express @types/debug source-map-support eslint typescript prisma pm2`
+* `npm install --save-dev @types/cors @types/express @types/debug source-map-support eslint typescript prisma pm2`
 
 #### Creating tsconfig.json file
 

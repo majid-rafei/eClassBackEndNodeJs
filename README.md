@@ -297,3 +297,12 @@ Until now, we have only implemented the following CSV files (and corresponding t
 * `eClass7_1_PR_VA_restricted_en_01_190102xx.csv`
 
 These are sufficient for exploring and searching the simple E-class system.
+
+If the admin wants to add some extra standard data into the database,
+it is enough to add that CSV files in the `/data/csv` directory of the project and call the endpoint
+* `http://localhost:3000/eclass/initializeDatabase`
+
+Don't worry about duplicate entries, those are omitted in the insertion process,
+hence, only new entries will be added this way.
+
+Importing data by the user is another sub-task that will be done in the future.

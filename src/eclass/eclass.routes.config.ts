@@ -8,6 +8,9 @@ export class EclassRoutesConfig extends CommonRoutesConfig {
     }
     
     configureRoutes(): express.Application {
+        /**
+         * Route for initializing database using sample CSV files in the `data` directory of the project.
+         */
         this.app
             .route(`/eclass/initializeDatabase`)
             .get(EclassController.initializeDatabase);

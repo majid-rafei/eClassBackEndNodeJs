@@ -1,6 +1,4 @@
 import {ReadCsvService} from "../../common/services/read-csv.service";
-import PrismaService from "../../common/services/prisma.service";
-const prisma = PrismaService.getPrisma();
 import {
     eclass7_cc,
     eclass7_pr,
@@ -12,6 +10,7 @@ import {
 import * as fs from "fs";
 import {environment} from "../../../environments/environment";
 import responseService from "../../common/services/response.service";
+import {EclassDao} from "../daos/eclass.dao";
 export interface ImportResult {
     fileName: string,
     msg: string,
@@ -19,7 +18,9 @@ export interface ImportResult {
 }
 
 export class LoadDatabaseService {
-    
+    /**
+     * Seeds the database with the initial data getting from CSV files in the `data` directory of the project
+     */
     async initializeDatabase(): Promise<any> {
         let directoryPath: string = process.cwd() + environment.CSV_DATA_PATH; //'/data/csv'
         const files = fs.readdirSync(directoryPath); //, {withFileTypes: true}
@@ -39,69 +40,52 @@ export class LoadDatabaseService {
                 .readFileContent(filePath, delimiter)
                 .then(async (resp: any) => {
                     if (typeof resp == 'string') {
-                        result.push(this.setResultOfImport(fileName, '', false))
+                        result.push(this._setResultOfImport(fileName, '', false))
                         return false;
                     }
                     else if (Object.prototype.toString.call(resp) === '[object Array]') {
                         let isImported = await this.importIntoDatabase(resp);
                         if (typeof isImported == 'string') {
-                            result.push(this.setResultOfImport(fileName, isImported, false))
+                            result.push(this._setResultOfImport(fileName, isImported, false))
                             return false;
                         }
-                        result.push(this.setResultOfImport(fileName, '', true))
+                        result.push(this._setResultOfImport(fileName, '', true))
                         return true;
                     }
                     else {
-                        result.push(this.setResultOfImport(fileName, '', false))
+                        result.push(this._setResultOfImport(fileName, '', false))
                         return false;
                     }
                 }).catch((error: any) => {
-                    result.push(this.setResultOfImport(fileName, '', false))
+                    result.push(this._setResultOfImport(fileName, '', false))
                     return false;
                 })
         }
         return responseService.rsp({items: result});
     }
     
+    /**
+     * This function inserts array of entries into specified table.
+     * @param entries
+     * @param tableName
+     */
     async importIntoDatabase(entries: any[], tableName: string = ''): Promise<any> {
-        // console.log(entries)
-        let _prisma: any;
         if (tableName == '') {
             tableName = this.findTableName(entries[0]);
         }
         if (tableName == '') {
             return 'Headers are not compatible with any table of simple E-Class system';
         }
-        switch (tableName) {
-            case 'eclass7_cc':
-                _prisma = prisma.eclass7_cc;
-                break;
-            case 'eclass7_pr':
-                _prisma = prisma.eclass7_pr;
-                break;
-            case 'eclass7_cc_pr':
-                _prisma = prisma.eclass7_cc_pr;
-                break;
-            case 'eclass7_va':
-                _prisma = prisma.eclass7_va;
-                break;
-            case 'eclass7_un':
-                _prisma = prisma.eclass7_un;
-                break;
-            case 'eclass7_pr_va':
-                _prisma = prisma.eclass7_pr_va;
-                break;
-        }
-        return _prisma.createMany({
-            data: entries,
-            skipDuplicates: true,
-        }).then((resp: any) => {
-            return true;
-        }).catch((error: any) => {
-            return error.message;
-        })
+        return (new EclassDao()).createMany(entries, tableName)
+            .catch((error) => {
+                return error.message;
+            });
     }
     
+    /**
+     * Finds table name according to the item type.
+     * @param item
+     */
     findTableName(item: any): string {
         let tableName: string = '';
         if (this.isEclassCc(item)) tableName = 'eclass7_cc';
@@ -113,17 +97,29 @@ export class LoadDatabaseService {
         return tableName;
     }
     
+    /**
+     * Checks if item has the Class type.
+     * @param item
+     */
     isEclassCc(item: any): item is eclass7_cc {
         return (item as eclass7_cc).IrdiCC !== undefined
             && (item as eclass7_cc).Supplier !== undefined;
     }
     
+    /**
+     * Checks if item has the Property type
+     * @param item
+     */
     isEclassPr(item: any): item is eclass7_pr {
         return (item as eclass7_pr).IrdiPR !== undefined
             && (item as eclass7_pr).IrdiUN !== undefined
             && (item as eclass7_pr).Supplier !== undefined;
     }
     
+    /**
+     * Checks if item has the Class-Property type
+     * @param item
+     */
     isEclassCcPr(item: any): item is eclass7_cc_pr {
         return (item as eclass7_cc_pr).IrdiCC !== undefined
             && (item as eclass7_cc_pr).IdCC !== undefined
@@ -131,23 +127,41 @@ export class LoadDatabaseService {
             && (item as eclass7_cc_pr).IdPR !== undefined;
     }
     
+    /**
+     * Checks if item has the Value type
+     * @param item
+     */
     isEclassVa(item: any): item is eclass7_va {
         return (item as eclass7_va).IrdiVA !== undefined
             && (item as eclass7_va).Supplier !== undefined;
     }
     
+    /**
+     * Checks if item has the Unit type
+     * @param item
+     */
     isEclassUn(item: any): item is eclass7_un {
         return (item as eclass7_un).IrdiUN !== undefined
             && (item as eclass7_un).StructuredNaming !== undefined;
     }
     
+    /**
+     * Checks if item has the Property-Value type
+     * @param item
+     */
     isEclassPrVa(item: any): item is eclass7_pr_va {
         return (item as eclass7_pr_va).IrdiPR !== undefined
             && (item as eclass7_pr_va).IrdiVA !== undefined
             && !(item as eclass7_pr_va).hasOwnProperty('IrdiCC');
     }
     
-    setResultOfImport(fileName: string, msg: string = '', done: boolean) {
+    /**
+     * Sets the result of each data insertion
+     * @param fileName
+     * @param msg
+     * @param done
+     */
+    private _setResultOfImport(fileName: string, msg: string = '', done: boolean) {
         if (msg == '') {
             if (done) msg = 'Done successfully';
             else msg = 'Headers are not compatible with any table of simple E-Class system';

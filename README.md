@@ -314,7 +314,10 @@ Importing data by the user is another sub-task that will be done in the future.
 ### Sub-task 4-4: Developing getFields endpoint: this endpoint gives fields of e-class tables
 
 At the UI side, search fields need the list of fields of main tables (Class, Property, Value, Unit) to do a complete search.
-The `getFields` endpoint is intended for this purpose.
+The endpoint
+* `http://localhost:3000/eclass/getFields`
+
+is intended for this purpose.
 
 The response has a format of:
 ```json

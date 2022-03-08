@@ -22,12 +22,13 @@ The implementation of the project is decided into the following sub-tasks:
     * Sub-task 2-2: Creating directories like interfaces, services, etc. to add common files created during project development
 * Step 3: Initializing and preparing database connection
     * Sub-task 3-1: Initializing and preparing codes for database connection using Prisma package.
-    * Sub-task 3-2: Importing E-class csv files into database
 * Step 4: Developing E-Class module
-    * Sub-task 4-1: Creating directories for controllers, services, daos, middlewares, dto, etc.
+    * Sub-task 4-1: Creating directories for controllers, services, daos, middlewares, etc.
     * Sub-task 4-2: Creating Route file for eclass module and implementing needed routes and initializing app.ts
-    * Sub-task 4-3: Developing getTableFields endpoint: this endpoint gives fields of e-class tables
-    * Sub-task 4-4: Developing getStructuredData endpoint: this endpoint gives structured data of simple e-class tables, filters for searching E-class tables are applied on this endpoint
+    * Sub-task 4-3: Developing initializeDatabase endpoint: importing E-class csv files into database
+    * Sub-task 4-4: Developing getTableFields endpoint: this endpoint gives fields of e-class tables
+    * Sub-task 4-5: Developing getStructuredData endpoint: this endpoint gives structured data of simple e-class tables, filters for searching E-class tables are applied on this endpoint
+    * Sub-task 4-6: Developing importCsvFiles endpoint: using this endpoint, user can import CSV files into database
 * Step 5: Developing user module
     * Sub-task 5-1: Creating endpoints for creating, listing, updating, and deleting users
     * Sub-task 5-2: Developing user authentication
@@ -175,3 +176,20 @@ and then the following code to make a query:
 ```ts
 prisma.TABLE_NAME.ACTION({...})
 ```
+
+## Step 4: Developing E-Class module
+
+In this part, the E-Class module is developed and as a result, some endpoints are available to use, including:
+* initializeDatabase
+* getTableFields
+* getStructuredData
+* importCsvFiles
+
+### Sub-task 4-1: Creating directories for controllers, services, daos, middlewares, etc.
+
+A most common structure for each module contains controllers, services, daos, and middlewares directories which are respectively 
+* (controllers) for handling endpoints and sending request params to the service for further processes,
+* (services) for processing requests according to the provided params and calling daos if needed,
+* (daos) for fetching from, inserting into, and updating the database,
+* (middlewares) for pre-processing requests before getting into controllers.
+We will make these directories for further development.

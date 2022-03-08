@@ -210,7 +210,8 @@ Here we implement required and essential codes to handle a request by Node.js an
 
 For handling response codes, a new package is installed:
 * `npm i http-status-codes`
-  This package gives http response codes.
+
+This package gives http response codes.
 
 At this point, if we call `/eclass/initializeDatabase`
 we will get `The initializeDatabase endpoint is OK` response.

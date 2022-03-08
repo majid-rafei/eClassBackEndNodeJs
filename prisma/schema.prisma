@@ -9,3 +9,101 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model eclass7_cc {
+    Supplier            String
+    IdCC                String?
+    Identifier          String?
+    VersionNumber       String?
+    VersionDate         String?
+    RevisionNumber      String?
+    CodedName           String?
+    PreferredName       String?
+    Definition          String?
+    ISOLanguageCode     String?
+    ISOCountryCode      String?
+    Note                String?
+    Remark              String?
+    Level               String?
+    MKSubclass          String?
+    MKKeyword           String?
+    MKBSA               String?
+    IrdiCC              String                  @id
+}
+
+model eclass7_pr {
+    Supplier            String
+    IdPR                String?
+    Identifier          String?
+    VersionNumber       String?
+    VersionDate         String?
+    RevisionNumber      String?
+    PreferredName       String?
+    ShortName           String?
+    Definition          String?
+    Note                String?
+    Remark              String?
+    FormularSymbol      String?
+    IrdiUN              String?
+    ISOLanguageCode     String?
+    ISOCountryCode      String?
+    Category            String?
+    AttributeType       String?
+    Reference           String?
+    DefinitionClass     String?
+    DataType            String?
+    DigitsBeforeComma   String?
+    DigitsAfterComma    String?
+    NumberOfCharacters  String?
+    IrdiPR              String                  @id
+    CurrencyAlphaCode   String?
+}
+
+model eclass7_cc_pr {
+    SupplierIdCC        String?
+    IdCC                String?
+    ClassCodedName      String?
+    SupplierIdPR        String?
+    IdPR                String?
+    IrdiCC              String
+    IrdiPR              String                  @unique
+}
+
+model eclass7_va {
+    Supplier            String
+    IdVA                String?
+    Identifier          String?
+    VersionNumber       String?
+    RevisionNumber      String?
+    VersionDate         String?
+    PreferredName       String?
+    ShortName           String?
+    Definition          String?
+    Reference           String?
+    ISOLanguageCode     String?
+    ISOCountryCode      String?
+    IrdiVA              String                  @id
+    DataType            String?
+}
+
+model eclass7_un {
+    StructuredNaming    String
+    ShortName           String?
+    Definition          String?
+    Source              String?
+    Comment             String?
+    SINotation          String?
+    SIName              String?
+    DINNotation         String?
+    ECEName             String?
+    ECECode             String?
+    NISTName            String?
+    IECClassification   String?
+    IrdiUN              String                  @id
+    NameOfDedicatedQuantity String?
+}
+
+model eclass7_pr_va {
+    IrdiPR              String
+    IrdiVA              String                  @unique
+}

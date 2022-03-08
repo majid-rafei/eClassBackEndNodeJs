@@ -10,6 +10,8 @@ In order to run project, please follow these stepsL
 * Download this git repository
 * Run: `npm install`
 * Run: `sudo docker-compose up -d`
+* Run: `npx prisma migrate dev --name init`
+* Run: `npm start`
 
 ## Steps into the back-end project
 The implementation of the project is decided into the following sub-tasks:
@@ -217,3 +219,72 @@ At this point, if we call `/eclass/initializeDatabase`
 we will get `The initializeDatabase endpoint is OK` response.
 
 At the next sub-task, we will implement services needed for initializeDatabase endpoint.
+
+## Sub-task 4-3: Developing initializeDatabase endpoint: importing E-class csv files into database
+
+Simple E-class system offers many sample CSV files which are used for initial considerations.
+These CSV files include some classes, properties, units, and values of electronic devices (categories).
+To import these data into the database, we need a service whose job is to read data from CSV files and then insert them into a related table using Prisma.
+
+Therefore, an endpoint named `initializeDatabase` is created to provide the required REST API for this task.
+If needed, another endpoint could be created to import external CSV files into the database by the user of the application.
+This task will be done in another sub-task in the future.
+
+#### Creating models of the simple E-class system
+
+Before starting the insertion task, models (or schema) of the E-class database should be written in the `schema.prisma` file.
+With the help of the models, we define fields and the types of each table.
+By executing
+* `npx prisma migrate dev --name init`
+
+command, Prisma models are converted into the typescript types and can be used as a type.
+Also, we can determine *id* for each table and the default value for each field.
+Relations to the other tables are defined in the model.
+
+#### Creating services required to import entries of CSV files into the database
+
+Our approach here is to set a default directory for initial data and read all CSV files from there.
+Then import file contents into the database according to the models.
+We develop a mechanism that detects the type or model of the CSV file and imports its rows into the corresponding table.
+We only read files with `.CSV` extension for a simpler mechanism of importing.
+The default route for the CSV data is `APP_ROUTE/data/csv`
+
+To read CSV files, we use package named `csv-parse` by installing it:
+* `npm install csv-parse`
+
+By the provided APIs of this package, data read from files is easy and the result is an array of objects with key-value pairs.
+This array is easy to use for importing into a database.
+
+A common service (`read-csv.service.ts`) is implemented to read the file with the given file path.
+If the file does not exist, the `readFileContent` function of this service will return the `'File does not exist!'` message.
+Default CSV delimiter and directory are set in the environment file.
+
+The result is returned to the `load-database.service.ts` service for importing into the database.
+This service is located in the services' directory of the eclass module.
+Duplicate entries are omitted when inserted into the database by setting a flag in Prisma `createMany` command:
+* `skipDuplicates: true`
+
+Now, if we call the endpoint `http://localhost:3000/eclass/initializeDatabase`,
+it will give a list of files found in the data directory,
+and each file has a `msg` property which keeps the result message of importing.
+For example, if the CSV file is not compatible with a simple E-class system, then the `msg` will be:
+* `Headers are not compatible with any table of simple E-Class system`
+
+and if the import was done successfully, the `msg` will be:
+* `Done successfully`
+
+Also, another property is considered which is a flag and set to true if successful and false in case of error.
+
+The following is an example of the response:
+```json
+{
+  "fileName": "eClass7_1_CC_en_01_190102xx.csv",
+  "msg": "Done successfully",
+  "done": true
+},
+{
+"fileName": "eClass7_1_KWSY_en_01_190102xx.csv",
+"msg": "Headers are not compatible with any table of simple E-Class system",
+"done": false
+},
+```

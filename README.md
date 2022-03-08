@@ -302,7 +302,11 @@ If the admin wants to add some extra standard data into the database,
 it is enough to add that CSV files in the `/data/csv` directory of the project and call the endpoint
 * `http://localhost:3000/eclass/initializeDatabase`
 
+By executing this command, all CSV files (in the `/data/csv` directory) will be processed for insertion.
+
 Don't worry about duplicate entries, those are omitted in the insertion process,
 hence, only new entries will be added this way.
+
+File names are not important when importing CSV data into the database, only format and fields are of concern.
 
 Importing data by the user is another sub-task that will be done in the future.

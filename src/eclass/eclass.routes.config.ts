@@ -11,6 +11,13 @@ export class EclassRoutesConfig extends CommonRoutesConfig {
         this.app
             .route(`/eclass/initializeDatabase`)
             .get(EclassController.initializeDatabase);
+    
+        /**
+         * Route for getting fields of all E-class main tables
+         */
+        this.app
+            .route(`/eclass/getFields`)
+            .get(EclassController.getFields);
         
         return this.app;
     }

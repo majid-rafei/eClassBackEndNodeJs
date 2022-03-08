@@ -28,7 +28,7 @@ The implementation of the project is decided into the following sub-tasks:
     * Sub-task 4-1: Creating directories for controllers, services, daos, middlewares, etc.
     * Sub-task 4-2: Creating Route file for eclass module and implementing needed routes and initializing app.ts
     * Sub-task 4-3: Developing initializeDatabase endpoint: importing E-class csv files into database
-    * Sub-task 4-4: Developing getTableFields endpoint: this endpoint gives fields of e-class tables
+    * Sub-task 4-4: Developing getFields endpoint: this endpoint gives fields of e-class tables
     * Sub-task 4-5: Developing getStructuredData endpoint: this endpoint gives structured data of simple e-class tables, filters for searching E-class tables are applied on this endpoint
     * Sub-task 4-6: Developing importCsvFiles endpoint: using this endpoint, user can import CSV files into database
 * Step 5: Developing user module
@@ -183,7 +183,7 @@ prisma.TABLE_NAME.ACTION({...})
 
 In this part, the E-Class module is developed and as a result, some endpoints are available to use, including:
 * initializeDatabase
-* getTableFields
+* getFields
 * getStructuredData
 * importCsvFiles
 
@@ -310,3 +310,27 @@ hence, only new entries will be added this way.
 File names are not important when importing CSV data into the database, only format and fields are of concern.
 
 Importing data by the user is another sub-task that will be done in the future.
+
+### Sub-task 4-4: Developing getFields endpoint: this endpoint gives fields of e-class tables
+
+At the UI side, search fields need the list of fields of main tables (Class, Property, Value, Unit) to do a complete search.
+The `getFields` endpoint is intended for this purpose.
+
+The response has a format of:
+```json
+{
+  "done": true,
+  "msg": "Successfully done",
+  "data": {
+    "items": {
+      "cl": ['...'],
+      "pr": ['...'],
+      "va": ['...'],
+      "un": ['...']
+    }
+  }
+}
+```
+
+In this step, the queries are implemented in the `.dao.ts` files in the `daos` directory.
+Each table has a `.dao.ts` file for maintaining queries written with Prisma.

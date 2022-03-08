@@ -193,3 +193,26 @@ A most common structure for each module contains controllers, services, daos, an
 * (daos) for fetching from, inserting into, and updating the database,
 * (middlewares) for pre-processing requests before getting into controllers.
 We will make these directories for further development.
+
+### Sub-task 4-2: Creating Route file for eclass module and implementing needed routes and initializing app.ts
+
+The first route to implement is the database initialization route.
+For that purpose, we create a file named *app.ts* to handle incoming requests and return the response to the caller.
+This *app.ts* file is the entry point of the application and each request passes through it.
+In *app.ts* routes are gathered into an array (routes) by adding config file of each module and each time a request arrives,
+the corresponding module will handle the request for further processes.
+In *app.ts* requests are logged and the server is started at the given port.
+
+Middlewares are called in routes config file of module before sending the params to the controller.
+Controller is the endpoint of each request and the final response of the request is created there.
+
+Here we implement required and essential codes to handle a request by Node.js and *app.ts* file.
+
+For handling response codes, a new package is installed:
+* `npm i http-status-codes`
+  This package gives http response codes.
+
+At this point, if we call `/eclass/initializeDatabase`
+we will get `The initializeDatabase endpoint is OK` response.
+
+At the next sub-task, we will implement services needed for initializeDatabase endpoint.

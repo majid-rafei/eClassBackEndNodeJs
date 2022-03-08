@@ -13,6 +13,11 @@ class EclassController {
     
     constructor() { }
     
+    /**
+     * This endpoint is for initializing database using sample CSV files.
+     * @param req
+     * @param res
+     */
     async initializeDatabase(req: express.Request, res: express.Response) {
         let result: any;
         log(result = (new LoadDatabaseService()).initializeDatabase());

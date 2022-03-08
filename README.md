@@ -288,3 +288,12 @@ The following is an example of the response:
 "done": false
 },
 ```
+Until now, we have only implemented the following CSV files (and corresponding tables):
+* `eClass7_1_CC_en_01_190102xx.csv`
+* `eClass7_1_PR_en_01_190102xx.csv`
+* `eClass7_1_CC_PR_en_01_190102xx.csv`
+* `eClass7_1_VA_en_01_190102xx.csv`
+* `eClass7_1_UN_en_01_190102xx.csv`
+* `eClass7_1_PR_VA_restricted_en_01_190102xx.csv`
+
+These are sufficient for exploring and searching the simple E-class system.

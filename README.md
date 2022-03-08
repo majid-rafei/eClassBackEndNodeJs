@@ -299,7 +299,7 @@ Until now, we have only implemented the following CSV files (and corresponding t
 These are sufficient for exploring and searching the simple E-class system.
 
 If the admin wants to add some extra standard data into the database,
-it is enough to add that CSV files in the `/data/csv` directory of the project and call the endpoint
+it is enough to add those CSV files in the `/data/csv` directory of the project and call the endpoint
 * `http://localhost:3000/eclass/initializeDatabase`
 
 By executing this command, all CSV files (in the `/data/csv` directory) will be processed for insertion.

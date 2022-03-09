@@ -20,7 +20,7 @@ The implementation of the project is decided into the following sub-tasks:
     * Sub-task 1-2: Creating docker-compose.yml file to create a container for postgresql database &#9989;
     * Sub-task 1-3: Creating src folder for storing the project modules &#9989;
 * Step 2: Initializing Common module: to store common codes
-    * Sub-task 2-1: Creating common Route file to use with other modules
+    * Sub-task 2-1: Creating common Route file to use with other modules &#9989;
     * Sub-task 2-2: Creating directories like interfaces, services, etc. to add common files created during project development
 * Step 3: Initializing and preparing database connection
     * Sub-task 3-1: Initializing and preparing codes for database connection using Prisma package.

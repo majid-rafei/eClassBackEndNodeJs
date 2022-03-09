@@ -16,7 +16,7 @@ In order to run project, please follow these steps:
 ## Steps into the back-end project
 The implementation of the project is decided into the following sub-tasks:
 * Step 1: Initialization:
-    * Sub-task 1-1: Initializing npm, installing required packages, and creating tsconfig.json file U+2705
+    * Sub-task 1-1: Initializing npm, installing required packages, and creating tsconfig.json file &#9989;
     * Sub-task 1-2: Creating docker-compose.yml file to create a container for postgresql database
     * Sub-task 1-3: Creating src folder for storing the project modules
 * Step 2: Initializing Common module: to store common codes

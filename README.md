@@ -337,3 +337,44 @@ The response has a format of:
 
 In this step, the queries are implemented in the `.dao.ts` files in the `daos` directory.
 Each table has a `.dao.ts` file for maintaining queries written with Prisma.
+
+## Sub-task 4-5: Developing `getStructuredData` endpoint
+
+This endpoint gives structured data of simple e-class tables.
+Filters for searching E-class tables are applied to this endpoint.
+This endpoint does the main task of the application.
+
+### Structured data
+
+Structured data returned as the response obey the patter:
+```json
+{
+  "name": "...",
+  "data": {},
+  "children": [],
+  "type": "..."
+}
+```
+* `name` property is a string and chooses according to the type,
+  for a `Class` or `Property`, or `Value` data type, the `name` is the value of the `PreferredName` field of the table,
+  and for a `Unit` data type the `name` is the value of `StructuredNaming` field of the unit table.
+* `data` property is the data object of the item of concern, `Class`, `Property`, `Value`, or `Unit` item.
+* `children` property is an array containing children of the item.
+  A `Class` item has children of `Property`(ies),
+  a `Property` has children of `Value` and `Unit` items.
+* `type` property indicates the type of the item, `cl` for `Class`, `pr` for `Property`, `va` for `Value`, and `un` for `Unit`.
+
+A tree is constructed using structured data at the front end which provides an easy exploring of a simple E-class system.
+
+### Search
+
+All types of simple E-class systems are searchable.
+A search box can be provided for each type. This is done at the UI app.
+In addition, we can search (or query) for all fields (columns) of each type.
+
+4 search box takes AND with each other, that means, for example, if we search for the unit, then only those properties and classes
+which contains that unit will be returned.
+In other words, search is done hierarchically.
+If all search fields keep empty, then a complete set of structured data will be returned.
+
+A middleware is written and used for sanitizing query params of requests.

@@ -5,7 +5,7 @@ import {
     eclass7_cc_pr,
     eclass7_va,
     eclass7_un,
-    eclass7_pr_va
+    eclass7_cc_pr_va
 } from "@prisma/client";
 import * as fs from "fs";
 import {environment} from "../../../environments/environment";
@@ -93,7 +93,7 @@ export class LoadDatabaseService {
         else if (this.isEclassCcPr(item)) tableName = 'eclass7_cc_pr';
         else if (this.isEclassVa(item)) tableName = 'eclass7_va';
         else if (this.isEclassUn(item)) tableName = 'eclass7_un';
-        else if (this.isEclassPrVa(item)) tableName = 'eclass7_pr_va';
+        else if (this.isEclassCcPrVa(item)) tableName = 'eclass7_cc_pr_va';
         return tableName;
     }
     
@@ -146,13 +146,13 @@ export class LoadDatabaseService {
     }
     
     /**
-     * Checks if item has the Property-Value type
+     * Checks if item has the Class-Property-Value type
      * @param item
      */
-    isEclassPrVa(item: any): item is eclass7_pr_va {
-        return (item as eclass7_pr_va).IrdiPR !== undefined
-            && (item as eclass7_pr_va).IrdiVA !== undefined
-            && !(item as eclass7_pr_va).hasOwnProperty('IrdiCC');
+    isEclassCcPrVa(item: any): item is eclass7_cc_pr_va {
+        return (item as eclass7_cc_pr_va).IrdiPR !== undefined
+            && (item as eclass7_cc_pr_va).IrdiVA !== undefined
+            && (item as eclass7_cc_pr_va).IrdiCC !== undefined;
     }
     
     /**

@@ -1,5 +1,7 @@
 import PrismaService from "../../common/services/prisma.service";
+import {EclassFilterParams} from "../../common/interfaces/filters.interface";
 const prisma = PrismaService.getPrisma();
+let validator = require('validator');
 
 export class EclassDao {
     /**
@@ -25,8 +27,8 @@ export class EclassDao {
             case 'eclass7_un':
                 _prisma = prisma.eclass7_un;
                 break;
-            case 'eclass7_pr_va':
-                _prisma = prisma.eclass7_pr_va;
+            case 'eclass7_cc_pr_va':
+                _prisma = prisma.eclass7_cc_pr_va;
                 break;
         }
         return _prisma.createMany({
@@ -37,5 +39,31 @@ export class EclassDao {
         }).catch((error: any) => {
             return error.message;
         })
+    }
+    
+    /**
+     * This method sets filters provided from input argument `params`.
+     * If you want to search all fields of the table, then provide `params.q` and not `params.c`,
+     * finally, if you want to search only one field, then provide both `params.c` and `params.q`.
+     * @param query
+     * @param params
+     */
+    addFilters(query: string, params: EclassFilterParams) {
+        // If no search string is provided
+        if (!params.q) return query;
+        // If column (table field) is specified
+        if (!!params.c) {
+            query += `and (${params.alias}."${params.c}" like '%${validator.escape(params.q)}%') `;
+        }
+        // Column (table field) is not specified, so, search all fields
+        else {
+            query += "and ( ";
+            for (let key in params.fields) {
+                query += `${params.alias}."${params.fields[key]['col']}" like '%${validator.escape(params.q)}%' or `;
+            }
+            // To remove last extra ' or' and close the parenthesis
+            query = query.substring(0, query.length - 3) + ") ";
+        }
+        return query;
     }
 }

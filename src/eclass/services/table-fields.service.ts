@@ -22,10 +22,10 @@ export class TableFieldsService {
         });
         return responseService.rsp({
             items: {
-                cl: Object.keys(ccFields[0]),
-                pr: Object.keys(prFields[0]),
-                va: Object.keys(vaFields[0]),
-                un: Object.keys(unFields[0]),
+                cl: Object.keys(ccFields[0]).map(val => {return {col: val, type: 's'}}),
+                pr: Object.keys(prFields[0]).map(val => {return {col: val, type: 's'}}),
+                va: Object.keys(vaFields[0]).map(val => {return {col: val, type: 's'}}),
+                un: Object.keys(unFields[0]).map(val => {return {col: val, type: 's'}}),
             }
         })
     }

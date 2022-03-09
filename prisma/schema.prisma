@@ -103,7 +103,9 @@ model eclass7_un {
     NameOfDedicatedQuantity String?
 }
 
-model eclass7_pr_va {
+model eclass7_cc_pr_va {
+    IrdiTemplate        String
+    IrdiCC              String
     IrdiPR              String
     IrdiVA              String                  @unique
 }

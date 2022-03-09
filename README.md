@@ -311,7 +311,7 @@ File names are not important when importing CSV data into the database, only for
 
 Importing data by the user is another sub-task that will be done in the future.
 
-### Sub-task 4-4: Developing getFields endpoint: this endpoint gives fields of e-class tables
+### Sub-task 4-4: Developing `getFields` endpoint: this endpoint gives fields of e-class tables
 
 At the UI side, search fields need the list of fields of main tables (Class, Property, Value, Unit) to do a complete search.
 The endpoint

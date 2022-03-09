@@ -182,10 +182,10 @@ prisma.TABLE_NAME.ACTION({...})
 ## Step 4: Developing E-Class module
 
 In this part, the E-Class module is developed and as a result, some endpoints are available to use, including:
-* initializeDatabase
-* getFields
-* getStructuredData
-* importCsvFiles
+* `initializeDatabase`
+* `getFields`
+* `getStructuredData`
+* `importCsvFiles`
 
 ### Sub-task 4-1: Creating directories for controllers, services, daos, middlewares, etc.
 

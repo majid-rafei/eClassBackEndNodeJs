@@ -25,7 +25,7 @@ The implementation of the project is decided into the following sub-tasks:
 * Step 3: Initializing and preparing database connection
     * Sub-task 3-1: Initializing and preparing codes for database connection using Prisma package. &#9989;
 * Step 4: Developing E-Class module
-    * Sub-task 4-1: Creating directories for controllers, services, daos, middlewares, etc.
+    * Sub-task 4-1: Creating directories for controllers, services, daos, middlewares, etc. &#9989;
     * Sub-task 4-2: Creating Route file for eclass module and implementing needed routes and initializing app.ts
     * Sub-task 4-3: Developing initializeDatabase endpoint: importing E-class csv files into database
     * Sub-task 4-4: Developing getFields endpoint: this endpoint gives fields of e-class tables

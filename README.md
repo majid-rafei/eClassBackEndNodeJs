@@ -23,7 +23,7 @@ The implementation of the project is decided into the following sub-tasks:
     * Sub-task 2-1: Creating common Route file to use with other modules &#9989;
     * Sub-task 2-2: Creating directories like interfaces, services, etc. to add common files created during project development &#9989;
 * Step 3: Initializing and preparing database connection
-    * Sub-task 3-1: Initializing and preparing codes for database connection using Prisma package.
+    * Sub-task 3-1: Initializing and preparing codes for database connection using Prisma package. &#9989;
 * Step 4: Developing E-Class module
     * Sub-task 4-1: Creating directories for controllers, services, daos, middlewares, etc.
     * Sub-task 4-2: Creating Route file for eclass module and implementing needed routes and initializing app.ts

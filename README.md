@@ -338,13 +338,13 @@ The response has a format of:
 In this step, the queries are implemented in the `.dao.ts` files in the `daos` directory.
 Each table has a `.dao.ts` file for maintaining queries written with Prisma.
 
-## Sub-task 4-5: Developing `getStructuredData` endpoint
+### Sub-task 4-5: Developing `getStructuredData` endpoint
 
 This endpoint gives structured data of simple e-class tables.
 Filters for searching E-class tables are applied to this endpoint.
 This endpoint does the main task of the application.
 
-### Structured data
+#### Structured data
 
 Structured data returned as the response obey the patter:
 ```json
@@ -366,7 +366,7 @@ Structured data returned as the response obey the patter:
 
 A tree is constructed using structured data at the front end which provides an easy exploring of a simple E-class system.
 
-### Search
+#### Search
 
 All types of simple E-class systems are searchable.
 A search box can be provided for each type. This is done at the UI app.

@@ -28,7 +28,7 @@ The implementation of the project is decided into the following sub-tasks:
     * Sub-task 4-1: Creating directories for controllers, services, daos, middlewares, etc. &#9989;
     * Sub-task 4-2: Creating Route file for eclass module and implementing needed routes and initializing app.ts &#9989;
     * Sub-task 4-3: Developing initializeDatabase endpoint: importing E-class csv files into database &#9989;
-    * Sub-task 4-4: Developing getFields endpoint: this endpoint gives fields of e-class tables
+    * Sub-task 4-4: Developing getFields endpoint: this endpoint gives fields of e-class tables &#9989;
     * Sub-task 4-5: Developing getStructuredData endpoint: this endpoint gives structured data of simple e-class tables, filters for searching E-class tables are applied on this endpoint
     * Sub-task 4-6: Developing importCsvFiles endpoint: using this endpoint, user can import CSV files into database
 * Step 5: Developing user module

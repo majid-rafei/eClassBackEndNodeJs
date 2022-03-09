@@ -220,7 +220,7 @@ we will get `The initializeDatabase endpoint is OK` response.
 
 At the next sub-task, we will implement services needed for initializeDatabase endpoint.
 
-## Sub-task 4-3: Developing initializeDatabase endpoint: importing E-class csv files into database
+### Sub-task 4-3: Developing `initializeDatabase` endpoint: importing E-class csv files into database
 
 Simple E-class system offers many sample CSV files which are used for initial considerations.
 These CSV files include some classes, properties, units, and values of electronic devices (categories).

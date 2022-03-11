@@ -33,7 +33,8 @@ The implementation of the project is decided into the following sub-tasks:
     * Sub-task 4-6: Developing importCsvFiles endpoint: using this endpoint, user can import CSV files into database
 * Step 5: Developing user module
     * Sub-task 5-1: Creating endpoints for creating, listing, updating, and deleting users
-    * Sub-task 5-2: Developing user authentication
+* Step 6: Authentication and authorization
+    * Sub-task 6-1: Developing user authentication
 
 ## Step 1: Initialization
 In this step, all initializations to have the base server using Node.js and typescript will be done.
@@ -378,3 +379,157 @@ In other words, search is done hierarchically.
 If all search fields keep empty, then a complete set of structured data will be returned.
 
 A middleware is written and used for sanitizing query params of requests.
+
+## Step 5: Developing user module
+
+The user module is developed.
+
+### Sub-task 5-1: Creating endpoints for creating, listing, updating, and deleting users
+
+As the basic actions of HTTP requests, there are 4 main actions of `create`, `read`, `update`, and `delete` (`CRUD`) for user context.
+Read action may divide into other endpoints like `get-by-id`, `get-by-email`, `get-all`, ... .
+We implement these actions for the further user management system.
+Some services need administration access, which will be added (implemented) in the next section of this project.
+
+For time management we need `moment` package and install it by:
+* `npm i moment`
+* `npm i moment-timezone --save`
+
+`user` model is added to the Prisma schema file and needs Prisma's  migrate command to implement the changes on the database:
+* `npx prisma migrate dev --name init`
+
+Now by serving the application using the `node` server, the user endpoints are ready to use.
+For testing user endpoints, the following CURL commands are presented.
+
+#### Create
+
+```shell
+curl --location --request POST 'localhost:3000/users' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "majid@rafei.me",
+    "password": "123456",
+    "username": "majid",
+    "firstName": "Majid",
+    "lastName": "Rafei"
+}'
+```
+and the response is:
+```json
+{
+  "done": true,
+  "msg": "Successfully created.",
+  "data": {
+    "item": {
+      "id": 2
+    }
+  }
+}
+```
+with `Status Code: 201 Created`.
+
+#### Get by id
+```shell
+curl --location --request GET 'localhost:3000/users/1' \
+--header 'Content-Type: application/json'
+```
+and the response is:
+```json
+{
+  "done": true,
+  "msg": "Successfully done",
+  "data": {
+    "item": {
+      "id": 2,
+      "email": "majid@rafei.me",
+      "username": "majid",
+      "firstName": "Majid",
+      "lastName": "Rafei",
+      "permissionLevel": 1
+    }
+  }
+}
+```
+with `Status Code: 200 OK`.
+
+#### Get all
+
+```shell
+curl --location --request GET 'localhost:3000/users' \
+--header 'Content-Type: application/json' \
+--data-raw ''
+```
+and the response is:
+```json
+{
+  "done": true,
+  "msg": "Successfully done",
+  "data": {
+    "items": [
+      {
+        "id": 1,
+        "email": "majid@rafei.me",
+        "username": "majid",
+        "firstName": "Majid",
+        "lastName": "Rafei",
+        "permissionLevel": 1
+      },
+      {
+        "id": 2,
+        "email": "majid2@rafei.me",
+        "username": "majid2",
+        "firstName": "Majid",
+        "lastName": "Rafei",
+        "permissionLevel": 1
+      }
+    ]
+  }
+}
+```
+with `Status Code: 200 OK`.
+
+#### Update
+
+```shell
+curl --location --request PUT 'localhost:3000/users/1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "majid@rafei.me",
+    "password": "1234567890",
+    "firstName": "Majid",
+    "lastName": "Rafei",
+    "permissionLevel": 2
+}'
+```
+and the response is:
+```json
+{
+  "done": true,
+  "msg": "Successfully updated.",
+  "data": {
+    "item": {
+      "id": 1
+    }
+  }
+}
+```
+with `Status Code: 200 OK`.
+
+#### Delete
+
+```shell
+curl --location --request DELETE 'localhost:3000/users/1' \
+--header 'Content-Type: application/json'
+```
+and the response is:
+```json
+{
+  "done": true,
+  "msg": "Successfully deleted.",
+  "data": {}
+}
+```
+with `Status Code: 200 OK`.
+
+A `json` file of requests is exported from the postman application for an easy test.
+This file (`DundTs BackEnd Node.js.postman_collection.json`) is placed in a folder named `postman` inside the `data` folder of the project.

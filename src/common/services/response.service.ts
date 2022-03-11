@@ -1,4 +1,5 @@
-import {FinalResponse, ResponseData} from "../interfaces/response.interface";
+import {ValidationError} from "express-validator";
+import {ErrorDataInterface, FinalResponseInterface, ResponseDataInterface} from "../interfaces/response.interface";
 
 class ResponseService {
     /**
@@ -6,7 +7,7 @@ class ResponseService {
      * @param data
      * @param msg
      */
-    rsp (data: ResponseData, msg?: string): FinalResponse {
+    rsp (data: ResponseDataInterface, msg?: string): FinalResponseInterface {
         return {
             done: true,
             msg: msg ? msg : 'Successfully done',
@@ -17,13 +18,13 @@ class ResponseService {
     /**
      * Is the error response for every service method.
      * @param msg
-     * @param data
+     * @param errorData
      */
-    err (msg: string, data?: ResponseData): FinalResponse {
+    err (msg: string, errorData?: ErrorDataInterface | ValidationError[]): FinalResponseInterface {
         return {
             done: false,
             msg: msg,
-            data: data,
+            error: errorData,
         }
     }
 }

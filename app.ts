@@ -6,6 +6,7 @@ import cors from 'cors';
 import {CommonRoutesConfig} from "./src/common/common.routes.config";
 import {debug} from "debug";
 import {EclassRoutesConfig} from "./src/eclass/eclass.routes.config";
+import {UsersRoutes} from "./src/users/users.routes.config";
 
 /**
  * Here we are defining constants.
@@ -47,6 +48,7 @@ app.use(expressWinston.logger(loggerOptions));
  * after sending the Express.js application object to have the routes added to our app!
  */
 routes.push(new EclassRoutesConfig(app));
+routes.push(new UsersRoutes(app));
 
 /**
  * This is a simple route to make sure everything is working properly

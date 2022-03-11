@@ -1,11 +1,20 @@
-export interface FinalResponse {
+import {ValidationError} from "express-validator";
+
+export interface FinalResponseInterface {
     done: boolean;
     msg: string;
-    data?: ResponseData;
+    data?: ResponseDataInterface;
+    error?: ErrorDataInterface | ValidationError[];
 }
 
-export interface ResponseData {
+export interface ResponseDataInterface {
     item?: any;
-    items?: any;
-    id?: number;
+    items?: any[];
+}
+
+export interface ErrorDataInterface {
+    msg?: string;
+    code?: number;
+    param?: string;
+    location?: string;
 }

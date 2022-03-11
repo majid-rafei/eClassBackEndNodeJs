@@ -1,4 +1,4 @@
-import {FinalResponse} from "../../common/interfaces/response.interface";
+import {FinalResponseInterface} from "../../common/interfaces/response.interface";
 import responseService from "../../common/services/response.service";
 import {EclassClDao} from "../daos/eclass-cl.dao";
 import {EclassPrDao} from "../daos/eclass-pr.dao";
@@ -7,7 +7,7 @@ import {EclassUnDao} from "../daos/eclass-un.dao";
 
 export class TableFieldsService {
     
-    async getFieldsOfAllTables(): Promise<FinalResponse> {
+    async getFieldsOfAllTables(): Promise<FinalResponseInterface> {
         let ccFields = await (new EclassClDao()).getMany({}, 1).catch((error: any) => {
             throw new Error(error.message);
         });
@@ -21,7 +21,7 @@ export class TableFieldsService {
             throw new Error(error.message);
         });
         return responseService.rsp({
-            items: {
+            item: {
                 cl: Object.keys(ccFields[0]).map(val => {return {col: val, type: 's'}}),
                 pr: Object.keys(prFields[0]).map(val => {return {col: val, type: 's'}}),
                 va: Object.keys(vaFields[0]).map(val => {return {col: val, type: 's'}}),

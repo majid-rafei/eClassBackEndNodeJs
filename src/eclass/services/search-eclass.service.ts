@@ -1,4 +1,4 @@
-import {FinalResponse} from "../../common/interfaces/response.interface";
+import {FinalResponseInterface} from "../../common/interfaces/response.interface";
 import responseService from "../../common/services/response.service";
 import {EclassClDao} from "../daos/eclass-cl.dao";
 import {EclassFilterParams, EclassFilters} from "../../common/interfaces/filters.interface";
@@ -23,14 +23,14 @@ export interface PrintConditions {
 
 export class SearchEclassService {
     
-    async getStructuredData(filters: EclassFilters): Promise<FinalResponse> {
+    async getStructuredData(filters: EclassFilters): Promise<FinalResponseInterface> {
         let structure = {};
         
         // Set filter conditions for all types
         let canPrint = this._setPrintConditions(filters);
         
         // Get fields of all tables
-        let _fields: FinalResponse = await (new TableFieldsService()).getFieldsOfAllTables();
+        let _fields: FinalResponseInterface = await (new TableFieldsService()).getFieldsOfAllTables();
         let fields = _fields.data?.items;
         
         // Set conditions for Class search

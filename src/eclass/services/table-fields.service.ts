@@ -8,7 +8,7 @@ import {EclassUnDao} from "../daos/eclass-un.dao";
 export class TableFieldsService {
     
     async getFieldsOfAllTables(): Promise<FinalResponseInterface> {
-        let ccFields = await (new EclassClDao()).getMany({}, 1).catch((error: any) => {
+        let clFields = await (new EclassClDao()).getMany({}, 1).catch((error: any) => {
             throw new Error(error.message);
         });
         let prFields = await (new EclassPrDao()).getMany({}, 1).catch((error: any) => {
@@ -22,7 +22,7 @@ export class TableFieldsService {
         });
         return responseService.rsp({
             item: {
-                cl: Object.keys(ccFields[0]).map(val => {return {col: val, type: 's'}}),
+                cl: Object.keys(clFields[0]).map(val => {return {col: val, type: 's'}}),
                 pr: Object.keys(prFields[0]).map(val => {return {col: val, type: 's'}}),
                 va: Object.keys(vaFields[0]).map(val => {return {col: val, type: 's'}}),
                 un: Object.keys(unFields[0]).map(val => {return {col: val, type: 's'}}),

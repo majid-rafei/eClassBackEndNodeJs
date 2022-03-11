@@ -31,7 +31,7 @@ export class SearchEclassService {
         
         // Get fields of all tables
         let _fields: FinalResponseInterface = await (new TableFieldsService()).getFieldsOfAllTables();
-        let fields = _fields.data?.items;
+        let fields = _fields.data?.item;
         
         // Set conditions for Class search
         let clParams = this._setFilterParams('cl', filters, fields);
@@ -199,6 +199,7 @@ export class SearchEclassService {
         // Default is to search all fields, search will be restricted if a filter is given.
         let params = Object.assign({}, this._initializeFilterParams());
         let _filters: any;
+        console.log('00000000', filters, fields)
         switch (type) {
             case 'cl':
                 _filters = !!filters.cl ? filters.cl : {};
@@ -234,6 +235,7 @@ export class SearchEclassService {
     private _setPrintConditions(filters: EclassFilters): PrintConditions {
         let conditions: PrintConditions = {cl: false, pr: false, va: false, un: false};
         let zeroCondition: boolean = !(filters.cl?.q) && !(filters.pr?.q) && !(filters.va?.q) && !(filters.un?.q);
+        console.log('1111111', filters)
         conditions.cl = !!(filters.cl?.q) && !(filters.pr?.q) && !(filters.va?.q) && !(filters.un?.q);
         conditions.cl = conditions.cl || zeroCondition;
         conditions.pr = !!(filters.pr?.q) && !(filters.va?.q) && !(filters.un?.q);

@@ -398,6 +398,11 @@ For time management we need `moment` package and install it by:
 `user` model is added to the Prisma schema file and needs Prisma's  migrate command to implement the changes on the database:
 * `npx prisma migrate dev --name init`
 
+Some middlewares are implemented to check the request before getting it to the `userController`.
+For instance, for the route of creating a new user, a middleware is placed to check if mandatory user data is provided or not.
+Another middleware is provided for validating the email format and password length.
+There are some other middlewares that are useful for pre-validations of the requests.
+
 Now by serving the application using the `node` server, the user endpoints are ready to use.
 For testing user endpoints, the following CURL commands are presented.
 

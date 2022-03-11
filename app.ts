@@ -7,6 +7,7 @@ import {CommonRoutesConfig} from "./src/common/common.routes.config";
 import {debug} from "debug";
 import {EclassRoutesConfig} from "./src/eclass/eclass.routes.config";
 import {UsersRoutes} from "./src/users/users.routes.config";
+import {AuthRoutes} from "./src/auth/auth.routes.config";
 
 /**
  * Here we are defining constants.
@@ -49,6 +50,7 @@ app.use(expressWinston.logger(loggerOptions));
  */
 routes.push(new EclassRoutesConfig(app));
 routes.push(new UsersRoutes(app));
+routes.push(new AuthRoutes(app));
 
 /**
  * This is a simple route to make sure everything is working properly

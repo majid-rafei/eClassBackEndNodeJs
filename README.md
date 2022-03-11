@@ -35,6 +35,7 @@ The implementation of the project is decided into the following sub-tasks:
     * Sub-task 5-1: Creating endpoints for creating, listing, updating, and deleting users
 * Step 6: Authentication and authorization
     * Sub-task 6-1: Developing user authentication
+    * Sub-task 6-2: Developing user authorization
 
 ## Step 1: Initialization
 In this step, all initializations to have the base server using Node.js and typescript will be done.
@@ -538,3 +539,59 @@ with `Status Code: 200 OK`.
 
 A `json` file of requests is exported from the postman application for an easy test.
 This file (`DundTs BackEnd Node.js.postman_collection.json`) is placed in a folder named `postman` inside the `data` folder of the project.
+
+## Step 6: Authentication and authorization
+
+Authentication is the process of validating user credentials (email and password).
+Authentication is done before authorization. 
+
+### Sub-task 6-1: Developing user authentication
+
+The process of user authentication starts with validating user credentials,
+which means user gives his/her email and password and the application checks if they are valid or not.
+If the credentials are valid, then access-token and refresh-token pair is generated for further authentication and authorization.
+Then after, each time user want to send a request to the server, access-token must be added to the authorization header of the request.
+
+On the other side, on each request, server will check access-token and if it passes validation, the request will be passed to the controller for the proceeding processes.
+Otherwise, the error response will be returned to the requester. In this case, user can send refresh-token to generate another access-refresh token pair.
+If this fails too, user should do a login to the system and give a fresh access-refresh token pair.
+
+Newly generated Access-token will be expired in a specified period of time, e.g. 36000 seconds.
+
+In this project, access-token format is JWT (json-web-token).
+An instance of access-token is as following:
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hamlkQHJhZmVpLm1lIiwicmVmcmVzaEtleSI6IjF6ZzVzZFBmZXVKSDFlYkZvOEF4dEE9PSIsImlhdCI6MTY0Njk4NTkyNSwiZXhwIjoxNjQ3MDIxOTI1fQ.0IDW4-Mcg9SouISi85gGFjlpIk4SzTLpzNKtbW5Dtf0
+```
+which consists of three parts separated by `dot` point, respectively:
+* HEADER: ALGORITHM & TOKEN TYPE
+```json
+{
+  "alg": "HS512",
+  "typ": "JWT"
+}
+```
+* PAYLOAD: DATA
+```json
+{
+  "email": "majid@rafei.me",
+  "refreshKey": "1zg5sdPfeuJH1ebFo8AxtA==",
+  "iat": 1646985925,
+  "exp": 1647021925
+}
+```
+* SIGNATURE
+```js
+HMACSHA512(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  'your-256-bit-secret'
+) 
+```
+A secret key is kept at the server side for generating tokens.
+In some methods, in addition to one static secret key, dynamic salt keys are added for more security 
+and that salt key is stored with the token id to the `auth` table.
+In this project, for simplicity, we just have a static secret key, 
+and it is the only secret value which is used for access-refresh token validation.
+
+Some middlewares are implemented and used for access-refresh token validations.

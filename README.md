@@ -594,3 +594,7 @@ In this project, for simplicity, we just have a static secret key,
 and it is the only secret value that is used for access-refresh token validation.
 
 Some middlewares are implemented and used for access-refresh token validations.
+
+Two new packages are installed for JWT and reading environment variables:
+* `npm i jsonwebtoken` && `npm i @type/jsonwebtoken --save-dev`
+* `npm i dotenv`

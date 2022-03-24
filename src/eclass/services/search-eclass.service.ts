@@ -199,7 +199,6 @@ export class SearchEclassService {
         // Default is to search all fields, search will be restricted if a filter is given.
         let params = Object.assign({}, this._initializeFilterParams());
         let _filters: any;
-        console.log('00000000', filters, fields)
         switch (type) {
             case 'cl':
                 _filters = !!filters.cl ? filters.cl : {};

@@ -30,12 +30,12 @@ The implementation of the project is decided into the following sub-tasks:
     * Sub-task 4-3: Developing initializeDatabase endpoint: importing E-class csv files into database &#9989;
     * Sub-task 4-4: Developing getFields endpoint: this endpoint gives fields of e-class tables &#9989;
     * Sub-task 4-5: Developing getStructuredData endpoint: this endpoint gives structured data of simple e-class tables, filters for searching E-class tables are applied on this endpoint &#9989;
-    * Sub-task 4-6: Developing importCsvFiles endpoint: using this endpoint, user can import CSV files into database
+    * Sub-task 4-6: Developing importCsvFiles endpoint: using this endpoint, user can import CSV files into database &#9989;
 * Step 5: Developing user module
-    * Sub-task 5-1: Creating endpoints for creating, listing, updating, and deleting users
+    * Sub-task 5-1: Creating endpoints for creating, listing, updating, and deleting users &#9989;
 * Step 6: Authentication and authorization
-    * Sub-task 6-1: Developing user authentication
-    * Sub-task 6-2: Developing user authorization
+    * Sub-task 6-1: Developing user authentication &#9989;
+    * Sub-task 6-2: Developing user authorization &#9989;
 
 ## Step 1: Initialization
 In this step, all initializations to have the base server using Node.js and typescript will be done.
